@@ -16,12 +16,12 @@ const Editor = React.forwardRef<HTMLDivElement, EditorProps>(
         ref
     ) => {
         return (
-            <div ref={ref} className="relative w-full">
+            <div className="relative w-full" ref={ref}>
                 <PlateContent
+                    aria-disabled={disabled}
                     className={className}
                     // disableDefaultStyles
                     readOnly={disabled ?? readOnly}
-                    aria-disabled={disabled}
                     {...props}
                 />
             </div>

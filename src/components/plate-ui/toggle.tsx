@@ -1,6 +1,6 @@
 'use client';
 
-import * as TogglePrimitive from '@radix-ui/react-toggle';
+import { Root } from '@radix-ui/react-toggle';
 import { cn, withVariants } from '@udecode/cn';
 import { cva } from 'class-variance-authority';
 
@@ -10,29 +10,29 @@ export const toggleVariants = cva(
     '[&_svg:not([data-icon])]:h-5 [&_svg:not([data-icon])]:w-5'
   ),
   {
+    defaultVariants: {
+      size: 'default',
+      variant: 'default',
+    },
     variants: {
+      size: {
+        circle: 'p-3',
+        default: 'h-10 px-3',
+        lg: 'h-11 px-5',
+        sm: 'h-9 px-2',
+      },
       variant: {
         default:
           'bg-transparent hover:bg-muted hover:text-muted-foreground data-[state=on]:bg-accent data-[state=on]:text-accent-foreground',
+        floating: 'rounded-full bg-primary text-primary-foreground',
         outline:
           'border border-input bg-transparent hover:bg-accent hover:text-accent-foreground',
-        floating: 'rounded-full bg-primary text-primary-foreground',
       },
-      size: {
-        default: 'h-10 px-3',
-        sm: 'h-9 px-2',
-        lg: 'h-11 px-5',
-        circle: 'p-3',
-      },
-    },
-    defaultVariants: {
-      variant: 'default',
-      size: 'default',
     },
   }
 );
 
-export const Toggle = withVariants(TogglePrimitive.Root, toggleVariants, [
+export const Toggle = withVariants(Root, toggleVariants, [
   'size',
   'variant',
 ]);

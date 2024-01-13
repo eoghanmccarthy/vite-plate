@@ -1,6 +1,6 @@
 'use client';
 
-import * as React from 'react';
+import { useState, useEffect, Children } from 'react';
 import { ComponentPropsWithoutRef, ReactNode } from 'react';
 import * as ToolbarPrimitive from '@radix-ui/react-toolbar';
 import { cn, withCn, withRef, withVariants } from '@udecode/cn';
@@ -40,28 +40,28 @@ export const ToolbarButton = withRef<
   typeof ToolbarPrimitive.Button,
   Omit<ComponentPropsWithoutRef<typeof Toggle>, 'type'> & {
     buttonType?: 'button' | 'toggle';
+    isDropdown?: boolean;
     pressed?: boolean;
     tooltip?: ReactNode;
-    isDropdown?: boolean;
   }
 >(
   (
     {
-      className,
-      variant,
-      size = 'sm',
-      isDropdown,
       children,
+      className,
+      isDropdown,
       pressed,
-      value,
+      size = 'sm',
       tooltip,
+      value,
+      variant,
       ...props
     },
     ref
   ) => {
-    const [isLoaded, setIsLoaded] = React.useState(false);
+    const [isLoaded, setIsLoaded] = useState(false);
 
-    React.useEffect(() => {
+    useEffect(() => {
       setIsLoaded(true);
     }, []);
 
@@ -69,15 +69,15 @@ export const ToolbarButton = withRef<
       typeof pressed === 'boolean' ? (
         <ToolbarToggleGroup type="single" value="single">
           <ToolbarToggleItem
-            ref={ref}
             className={cn(
               toggleVariants({
-                variant,
                 size,
+                variant,
               }),
               isDropdown && 'my-1 justify-between pr-1',
               className
             )}
+            ref={ref}
             value={pressed ? 'single' : ''}
             {...props}
           >
@@ -91,15 +91,15 @@ export const ToolbarButton = withRef<
         </ToolbarToggleGroup>
       ) : (
         <ToolbarPrimitive.Button
-          ref={ref}
           className={cn(
             toggleVariants({
-              variant,
               size,
+              variant,
             }),
             isDropdown && 'pr-1',
             className
           )}
+          ref={ref}
           {...props}
         >
           {children}
@@ -131,12 +131,12 @@ export const ToolbarGroup = withRef<
   {
     noSeparator?: boolean;
   }
->(({ className, children, noSeparator }, ref) => {
-  const childArr = React.Children.map(children, (c) => c);
-  if (!childArr || childArr.length === 0) return null;
+>(({ children, className, noSeparator }, ref) => {
+  const childArr = Children.map(children, (c) => c);
+  if (!childArr || childArr.length === 0) {return null;}
 
   return (
-    <div ref={ref} className={cn('flex', className)}>
+    <div className={cn('flex', className)} ref={ref}>
       {!noSeparator && (
         <div className="h-full py-1">
           <Separator orientation="vertical" />

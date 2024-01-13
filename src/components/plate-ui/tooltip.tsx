@@ -1,15 +1,15 @@
 'use client';
 
-import * as TooltipPrimitive from '@radix-ui/react-tooltip';
+import { Provider, Root, Trigger, Portal, Content } from '@radix-ui/react-tooltip';
 import { withCn, withProps } from '@udecode/cn';
 
-export const TooltipProvider = TooltipPrimitive.Provider;
-export const Tooltip = TooltipPrimitive.Root;
-export const TooltipTrigger = TooltipPrimitive.Trigger;
-export const TooltipPortal = TooltipPrimitive.Portal;
+export const TooltipProvider = Provider;
+export const Tooltip = Root;
+export const TooltipTrigger = Trigger;
+export const TooltipPortal = Portal;
 
 export const TooltipContent = withCn(
-  withProps(TooltipPrimitive.Content, {
+  withProps(Content, {
     sideOffset: 4,
   }),
   'z-50 overflow-hidden rounded-md border bg-popover px-3 py-1.5 text-sm text-popover-foreground shadow-md'
