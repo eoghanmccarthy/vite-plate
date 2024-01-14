@@ -1,18 +1,18 @@
 module.exports = {
   root: true,
-  extends: ['@eoghanmccarthy'],
-  ignorePatterns: ['dist', '.eslintrc.cjs'],
-  plugins: ['react-refresh'],
+  extends: ["@eoghanmccarthy"],
+  ignorePatterns: ["dist", ".eslintrc.cjs"],
+  plugins: ["react-refresh"],
   rules: {
-    'import/no-namespace': 1,
-    'react-refresh/only-export-components': [
-      'warn',
+    "import/no-namespace": 1,
+    "react-refresh/only-export-components": [
+      "warn",
       { allowConstantExport: true },
     ],
   },
   settings: {
-    'import/resolver': {
+    "import/resolver": {
       typescript: {},
-    }
-  }
-}
+    },
+  },
+};

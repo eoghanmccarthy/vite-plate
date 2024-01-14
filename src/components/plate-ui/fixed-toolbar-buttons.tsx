@@ -4,20 +4,20 @@ import {
   MARK_ITALIC,
   MARK_STRIKETHROUGH,
   MARK_UNDERLINE,
-} from '@udecode/plate-basic-marks';
-import { ListStyleType } from '@udecode/plate-indent-list';
-import { useEditorReadOnly } from '@udecode/plate-common';
+} from "@udecode/plate-basic-marks";
+import { ListStyleType } from "@udecode/plate-indent-list";
+import { useEditorReadOnly } from "@udecode/plate-common";
 
-import { Icons } from '@/components/icons';
+import { Icons } from "@/components/icons";
 
-import { AlignDropdownMenu } from './align-dropdown-menu';
-import { IndentListToolbarButton } from '@/components/plate-ui/indent-list-toolbar-button';
-import { InsertDropdownMenu } from './insert-dropdown-menu';
-import { LinkToolbarButton } from './link-toolbar-button';
-import { MarkToolbarButton } from './mark-toolbar-button';
-import { ModeDropdownMenu } from './mode-dropdown-menu';
-import { ToolbarGroup } from './toolbar';
-import { TurnIntoDropdownMenu } from './turn-into-dropdown-menu';
+import { AlignDropdownMenu } from "./align-dropdown-menu";
+import { IndentListToolbarButton } from "@/components/plate-ui/indent-list-toolbar-button";
+import { InsertDropdownMenu } from "./insert-dropdown-menu";
+import { LinkToolbarButton } from "./link-toolbar-button";
+import { MarkToolbarButton } from "./mark-toolbar-button";
+import { ModeDropdownMenu } from "./mode-dropdown-menu";
+import { ToolbarGroup } from "./toolbar";
+import { TurnIntoDropdownMenu } from "./turn-into-dropdown-menu";
 
 export function FixedToolbarButtons() {
   const readOnly = useEditorReadOnly();
@@ -27,7 +27,7 @@ export function FixedToolbarButtons() {
       <div
         className="flex flex-wrap"
         style={{
-          transform: 'translateX(calc(-1px))',
+          transform: "translateX(calc(-1px))",
         }}
       >
         {!readOnly && (
@@ -60,18 +60,17 @@ export function FixedToolbarButtons() {
               <MarkToolbarButton nodeType={MARK_CODE} tooltip="Code (⌘+E)">
                 <Icons.code />
               </MarkToolbarButton>
-
             </ToolbarGroup>
 
-              <ToolbarGroup>
-                  <AlignDropdownMenu />
-                  <IndentListToolbarButton nodeType={ListStyleType.Disc} />
-                  <IndentListToolbarButton nodeType={ListStyleType.Decimal} />
-              </ToolbarGroup>
+            <ToolbarGroup>
+              <AlignDropdownMenu />
+              <IndentListToolbarButton nodeType={ListStyleType.Disc} />
+              <IndentListToolbarButton nodeType={ListStyleType.Decimal} />
+            </ToolbarGroup>
 
-              <ToolbarGroup>
-                <LinkToolbarButton />
-              </ToolbarGroup>
+            <ToolbarGroup>
+              <LinkToolbarButton />
+            </ToolbarGroup>
           </>
         )}
 

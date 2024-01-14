@@ -1,45 +1,45 @@
-'use client';
+"use client";
 
-import { useState, useEffect, Children } from 'react';
-import { ComponentPropsWithoutRef, ReactNode } from 'react';
-import * as ToolbarPrimitive from '@radix-ui/react-toolbar';
-import { cn, withCn, withRef, withVariants } from '@udecode/cn';
+import { useState, useEffect, Children } from "react";
+import { ComponentPropsWithoutRef, ReactNode } from "react";
+import * as ToolbarPrimitive from "@radix-ui/react-toolbar";
+import { cn, withCn, withRef, withVariants } from "@udecode/cn";
 
-import { Icons } from '@/components/icons';
+import { Icons } from "@/components/icons";
 
-import { Separator } from './separator';
-import { Toggle, toggleVariants } from './toggle';
+import { Separator } from "./separator";
+import { Toggle, toggleVariants } from "./toggle";
 import {
   Tooltip,
   TooltipContent,
   TooltipPortal,
   TooltipTrigger,
-} from './tooltip';
+} from "./tooltip";
 
 export const Toolbar = withCn(
   ToolbarPrimitive.Root,
-  'relative flex select-none items-stretch gap-1 bg-background'
+  "relative flex select-none items-stretch gap-1 bg-background",
 );
 
 export const ToolbarToggleGroup = withCn(
   ToolbarPrimitive.ToolbarToggleGroup,
-  'flex items-center'
+  "flex items-center",
 );
 
 export const ToolbarLink = withCn(
   ToolbarPrimitive.Link,
-  'font-medium underline underline-offset-4'
+  "font-medium underline underline-offset-4",
 );
 
 export const ToolbarSeparator = withCn(
   ToolbarPrimitive.Separator,
-  'my-1 w-[1px] shrink-0 bg-border'
+  "my-1 w-[1px] shrink-0 bg-border",
 );
 
 export const ToolbarButton = withRef<
   typeof ToolbarPrimitive.Button,
-  Omit<ComponentPropsWithoutRef<typeof Toggle>, 'type'> & {
-    buttonType?: 'button' | 'toggle';
+  Omit<ComponentPropsWithoutRef<typeof Toggle>, "type"> & {
+    buttonType?: "button" | "toggle";
     isDropdown?: boolean;
     pressed?: boolean;
     tooltip?: ReactNode;
@@ -51,13 +51,13 @@ export const ToolbarButton = withRef<
       className,
       isDropdown,
       pressed,
-      size = 'sm',
+      size = "sm",
       tooltip,
       value,
       variant,
       ...props
     },
-    ref
+    ref,
   ) => {
     const [isLoaded, setIsLoaded] = useState(false);
 
@@ -66,7 +66,7 @@ export const ToolbarButton = withRef<
     }, []);
 
     const content =
-      typeof pressed === 'boolean' ? (
+      typeof pressed === "boolean" ? (
         <ToolbarToggleGroup type="single" value="single">
           <ToolbarToggleItem
             className={cn(
@@ -74,11 +74,11 @@ export const ToolbarButton = withRef<
                 size,
                 variant,
               }),
-              isDropdown && 'my-1 justify-between pr-1',
-              className
+              isDropdown && "my-1 justify-between pr-1",
+              className,
             )}
             ref={ref}
-            value={pressed ? 'single' : ''}
+            value={pressed ? "single" : ""}
             {...props}
           >
             <div className="flex flex-1">{children}</div>
@@ -96,8 +96,8 @@ export const ToolbarButton = withRef<
               size,
               variant,
             }),
-            isDropdown && 'pr-1',
-            className
+            isDropdown && "pr-1",
+            className,
           )}
           ref={ref}
           {...props}
@@ -117,26 +117,28 @@ export const ToolbarButton = withRef<
     ) : (
       <>{content}</>
     );
-  }
+  },
 );
 
 export const ToolbarToggleItem = withVariants(
   ToolbarPrimitive.ToggleItem,
   toggleVariants,
-  ['variant', 'size']
+  ["variant", "size"],
 );
 
 export const ToolbarGroup = withRef<
-  'div',
+  "div",
   {
     noSeparator?: boolean;
   }
 >(({ children, className, noSeparator }, ref) => {
   const childArr = Children.map(children, (c) => c);
-  if (!childArr || childArr.length === 0) {return null;}
+  if (!childArr || childArr.length === 0) {
+    return null;
+  }
 
   return (
-    <div className={cn('flex', className)} ref={ref}>
+    <div className={cn("flex", className)} ref={ref}>
       {!noSeparator && (
         <div className="h-full py-1">
           <Separator orientation="vertical" />

@@ -1,13 +1,13 @@
-import { cn } from '@udecode/cn';
-import { createZustandStore } from '@udecode/plate-common';
+import { cn } from "@udecode/cn";
+import { createZustandStore } from "@udecode/plate-common";
 import {
   CursorData,
   CursorOverlay as CursorOverlayPrimitive,
   CursorOverlayProps,
   CursorProps,
-} from '@udecode/plate-cursor';
+} from "@udecode/plate-cursor";
 
-export const cursorStore = createZustandStore('cursor')({
+export const cursorStore = createZustandStore("cursor")({
   cursors: {},
 });
 
@@ -31,8 +31,8 @@ export function Cursor({
         selectionRects.map((position, i) => (
           <div
             className={cn(
-              'pointer-events-none absolute z-10 opacity-[0.3]',
-              classNames?.selectionRect
+              "pointer-events-none absolute z-10 opacity-[0.3]",
+              classNames?.selectionRect,
             )}
             key={i}
             style={{
@@ -44,8 +44,8 @@ export function Cursor({
       {!disableCaret && caretPosition && (
         <div
           className={cn(
-            'pointer-events-none absolute z-10 w-0.5',
-            classNames?.caret
+            "pointer-events-none absolute z-10 w-0.5",
+            classNames?.caret,
           )}
           style={{ ...caretPosition, ...style }}
         />

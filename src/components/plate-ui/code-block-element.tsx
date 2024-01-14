@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import './code-block-element.css';
+import "./code-block-element.css";
 
-import { cn, withRef } from '@udecode/cn';
-import { useCodeBlockElementState } from '@udecode/plate-code-block';
-import { PlateElement } from '@udecode/plate-common';
+import { cn, withRef } from "@udecode/cn";
+import { useCodeBlockElementState } from "@udecode/plate-code-block";
+import { PlateElement } from "@udecode/plate-common";
 
-import { CodeBlockCombobox } from './code-block-combobox';
+import { CodeBlockCombobox } from "./code-block-combobox";
 
 export const CodeBlockElement = withRef<typeof PlateElement>(
   ({ children, className, ...props }, ref) => {
@@ -15,7 +15,7 @@ export const CodeBlockElement = withRef<typeof PlateElement>(
 
     return (
       <PlateElement
-        className={cn('relative py-1', state.className, className)}
+        className={cn("relative py-1", state.className, className)}
         ref={ref}
         {...props}
       >
@@ -33,5 +33,5 @@ export const CodeBlockElement = withRef<typeof PlateElement>(
         )}
       </PlateElement>
     );
-  }
+  },
 );

@@ -1,5 +1,5 @@
-import { DropdownMenuProps } from '@radix-ui/react-dropdown-menu';
-import { ELEMENT_BLOCKQUOTE } from '@udecode/plate-block-quote';
+import { DropdownMenuProps } from "@radix-ui/react-dropdown-menu";
+import { ELEMENT_BLOCKQUOTE } from "@udecode/plate-block-quote";
 import {
   collapseSelection,
   findNode,
@@ -10,11 +10,11 @@ import {
   toggleNodeType,
   useEditorRef,
   useEditorSelector,
-} from '@udecode/plate-common';
-import { ELEMENT_H1, ELEMENT_H2, ELEMENT_H3 } from '@udecode/plate-heading';
-import { ELEMENT_PARAGRAPH } from '@udecode/plate-paragraph';
+} from "@udecode/plate-common";
+import { ELEMENT_H1, ELEMENT_H2, ELEMENT_H3 } from "@udecode/plate-heading";
+import { ELEMENT_PARAGRAPH } from "@udecode/plate-paragraph";
 
-import { Icons } from '@/components/icons';
+import { Icons } from "@/components/icons";
 
 import {
   DropdownMenu,
@@ -24,38 +24,38 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
   useOpenState,
-} from './dropdown-menu';
-import { ToolbarButton } from './toolbar';
+} from "./dropdown-menu";
+import { ToolbarButton } from "./toolbar";
 
 const items = [
   {
-    description: 'Paragraph',
+    description: "Paragraph",
     icon: Icons.paragraph,
-    label: 'Paragraph',
+    label: "Paragraph",
     value: ELEMENT_PARAGRAPH,
   },
   {
-    description: 'Heading 1',
+    description: "Heading 1",
     icon: Icons.h1,
-    label: 'Heading 1',
+    label: "Heading 1",
     value: ELEMENT_H1,
   },
   {
-    description: 'Heading 2',
+    description: "Heading 2",
     icon: Icons.h2,
-    label: 'Heading 2',
+    label: "Heading 2",
     value: ELEMENT_H2,
   },
   {
-    description: 'Heading 3',
+    description: "Heading 3",
     icon: Icons.h3,
-    label: 'Heading 3',
+    label: "Heading 3",
     value: ELEMENT_H3,
   },
   {
-    description: 'Quote (⌘+⇧+.)',
+    description: "Quote (⌘+⇧+.)",
     icon: Icons.blockquote,
-    label: 'Quote',
+    label: "Quote",
     value: ELEMENT_BLOCKQUOTE,
   },
   // {
