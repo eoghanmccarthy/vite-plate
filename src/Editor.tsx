@@ -1,11 +1,13 @@
 import { useRef } from "react";
 import { cn, withProps } from "@udecode/cn";
 import {
+  createPlateEditor,
   createPlugins,
   Plate,
   PlateLeaf,
   PlateElement,
   RenderAfterEditable,
+  deserializeHtml,
 } from "@udecode/plate-common";
 import { createAlignPlugin } from "@udecode/plate-alignment";
 import {
@@ -39,6 +41,10 @@ import {
   createHighlightPlugin,
   MARK_HIGHLIGHT,
 } from "@udecode/plate-highlight";
+import {
+  createBlockquotePlugin,
+  ELEMENT_BLOCKQUOTE,
+} from "@udecode/plate-block-quote";
 import {
   createHeadingPlugin,
   ELEMENT_H1,
@@ -75,11 +81,17 @@ import { ParagraphElement } from "@/components/plate-ui/paragraph-element";
 
 import { Editor } from "@/components/editor.tsx";
 
+const resetBlockTypesCommonRule = {
+  defaultType: ELEMENT_PARAGRAPH,
+  types: [ELEMENT_BLOCKQUOTE],
+};
+
 const plugins = createPlugins(
   [
     // Nodes
     createParagraphPlugin(),
     createHeadingPlugin(),
+    createBlockquotePlugin(),
     createCodeBlockPlugin(),
     createHorizontalRulePlugin(),
     createLinkPlugin({
@@ -113,6 +125,7 @@ const plugins = createPlugins(
             ELEMENT_H1,
             ELEMENT_H2,
             ELEMENT_H3,
+            ELEMENT_BLOCKQUOTE,
             ELEMENT_CODE_BLOCK,
           ],
         },
@@ -126,6 +139,7 @@ const plugins = createPlugins(
             ELEMENT_H1,
             ELEMENT_H2,
             ELEMENT_H3,
+            ELEMENT_BLOCKQUOTE,
             ELEMENT_CODE_BLOCK,
           ],
         },
@@ -169,7 +183,7 @@ const plugins = createPlugins(
   },
 );
 
-const initialValue = [
+const defaultValue = [
   {
     children: [{ text: "Hello, World!" }],
     id: "1",
@@ -177,12 +191,48 @@ const initialValue = [
   },
 ];
 
+const editor = createPlateEditor({ plugins });
+
 export default function PlateEditor() {
   const containerRef = useRef(null);
 
+  const body = `
+    <div>
+        <h2>Hello, Atom!</h2>
+        <p><em>How are you?</em></p>
+        <code>aksdjvgh</code>
+    </div>`;
+
+  const deserializedValue = deserializeHtml(editor, {
+    element: body,
+  });
+
+  const initialValue = deserializedValue || defaultValue;
+
+  console.log("initialValue", initialValue);
+
+  //https://github.com/udecode/plate/issues/2804
+  const editorRef = useRef(editor);
+
+  // const onEditorChange = (value) => {
+  //   if (!editorRef.current) {
+  //     return;
+  //   }
+  //
+  //   const html = serializeHtml(editorRef.current, {
+  //     nodes: value,
+  //   });
+  //
+  //   console.log("onEditorChange", value, html);
+  // };
+
   return (
     <div className="max-w-[1336px] rounded-lg border bg-background shadow">
-      <Plate initialValue={initialValue} plugins={plugins}>
+      <Plate
+        initialValue={initialValue}
+        // onChange={onEditorChange}
+        plugins={plugins}
+      >
         <div
           className={cn(
             // Block selection
