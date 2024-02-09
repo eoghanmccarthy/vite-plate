@@ -9,6 +9,7 @@ import {
   RenderAfterEditable,
   deserializeHtml,
 } from "@udecode/plate-common";
+import { serializeHtml } from "@udecode/plate-serializer-html";
 import { createAlignPlugin } from "@udecode/plate-alignment";
 import {
   createBoldPlugin,
@@ -191,47 +192,45 @@ const defaultValue = [
   },
 ];
 
-const editor = createPlateEditor({ plugins });
+// https://github.com/udecode/plate/issues/2804
+const excludedSelectionPlugin = plugins?.filter(
+  (plugin) => plugin?.key !== "blockSelection",
+);
+
+const editor = createPlateEditor({ plugins: excludedSelectionPlugin });
 
 export default function PlateEditor() {
   const containerRef = useRef(null);
 
-  const body = `
-    <div>
-        <h2>Hello, Atom!</h2>
-        <p><em>How are you?</em></p>
-        <code>aksdjvgh</code>
-    </div>`;
+  // mock html string from server
+  const htmlString = `<div><p>Hello, World!</p></div>`;
 
   const deserializedValue = deserializeHtml(editor, {
-    element: body,
+    element: htmlString,
   });
 
   const initialValue = deserializedValue || defaultValue;
 
-  console.log("initialValue", initialValue);
-
   //https://github.com/udecode/plate/issues/2804
   const editorRef = useRef(editor);
 
-  // const onEditorChange = (value) => {
-  //   if (!editorRef.current) {
-  //     return;
-  //   }
-  //
-  //   const html = serializeHtml(editorRef.current, {
-  //     nodes: value,
-  //   });
-  //
-  //   console.log("onEditorChange", value, html);
-  // };
+  const onEditorChange = (value) => {
+    if (!editorRef.current) {
+      return;
+    }
+
+    const html = serializeHtml(editorRef.current, {
+      nodes: value,
+    });
+    // save html to server
+  };
 
   return (
     <div className="max-w-[1336px] rounded-lg border bg-background shadow">
       <Plate
         initialValue={initialValue}
-        // onChange={onEditorChange}
-        plugins={plugins}
+        onChange={onEditorChange}
+        plugins={excludedSelectionPlugin}
       >
         <div
           className={cn(
